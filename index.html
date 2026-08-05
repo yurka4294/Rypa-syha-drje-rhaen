@@ -93,12 +93,20 @@
             background-color: #a29bfe;
         }
 
+        /* Styling Pesan Rahasia Kustom */
         .secret-message {
             display: none;
             margin-top: 20px;
             padding-top: 15px;
             border-top: 2px dashed #ffb8c6;
             animation: fadeIn 0.8s forwards;
+            text-align: left;
+        }
+        .secret-message p {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 12px;
+            line-height: 1.6;
         }
 
         /* --- HALAMAN FULLSCREEN KORAN / KENANGAN --- */
@@ -121,7 +129,6 @@
             animation: slideInRight 0.5s forwards ease-out;
         }
 
-        /* Tombol Kembali Ikon Panah Melayang */
         .btn-back-icon {
             position: fixed;
             top: 15px;
@@ -147,7 +154,6 @@
             transform: scale(1.1);
         }
 
-        /* Container Koran Fullscreen */
         .news-container {
             max-width: 600px;
             margin: 50px auto 0;
@@ -252,9 +258,19 @@
                 <button class="btn btn-secondary" onclick="openNewspaper()">Foto Kenangan 📸</button>
             </div>
 
+            <!-- Pesan Rahasia Kustom -->
             <div class="secret-message" id="message">
-                <p>Terima kasih sudah hadir dan melengkapi hari-hariku. Semoga di usiamu yang baru ini kamu makin bahagia dan terus jadi versi terbaik dari dirimu!</p>
-                <p><b>Valar Morghulis, tapi cintaku padamu Valar Dohaeris! 💕</b></p>
+                <p>Hallo seng selamat ya kamu telah bertambah umur hari ini menjadi umur 24 kan harusnya? Lupa dikit ga ngaruh kali ya, kurangin marahnya seng udah makin tua banyakin mah uang bukan marah jangan lupa juga doa terbaik buat diri sendiri baru orang lain kamu tuh selalu mikirin orang lain mulu daripada diri kamu sendiri.</p>
+                
+                <p>Oh iyh itu yang ngutang ke kamu tagihan seng bawa gorok ancem mun teu di bayar teke. Sekali lagi selamat ya sengg ku aku tau kamu lagi cape mumet dengan tugas akhir kamu ini capeee sekali betul kan? Itu normal kok tapi secape capenya kerjain dan kalo misal tb tb terfikir kata kata dimana ini downgrade atau upgrade tugas akhir teh ya? Nah aku bantu jawab ya untuk semua yang kita ga ketahui kita pelajari itu namanya upgrade jadi jangan pernah pikir itu downgrade okey?</p>
+
+                <p>Oh ya jangan hawatir di tinggal jauh orang cuman cikarang itu cuman 100 km ke rmh kamu juga di kira kira mah dan pasti juga ada kalanya aku pulang kok kita bisa main atau sebaliknya kamu yang ke sana aku biayain sok tah kalo udh recovery duit ye tapi hahhaha.</p>
+
+                <p>Dah itu ajah sih yang aku bisa ungkapin buat sekarang ini jujur baru buat dari jam 10 heheh maaf ya seng sekali lagi.</p>
+
+                <p style="text-align: center; font-weight: bold; color: #d63384; margin-top: 15px;">
+                    Iōrās ñuhys zōbrie issa, Avy jorrāelan. Kirimvose ❤️
+                </p>
             </div>
         </div>
 
@@ -262,7 +278,6 @@
 
     <!-- HALAMAN FULLSCREEN KORAN / FOTO KENANGAN -->
     <div id="newspaperCard">
-        <!-- Tombol Kembali Berupa Ikon Panah -->
         <button class="btn-back-icon" onclick="closeNewspaper()">←</button>
 
         <div class="news-container">
@@ -277,13 +292,10 @@
                 </p>
 
                 <div class="news-grid">
-                    <!-- Foto 1: Berita Utama -->
                     <div class="news-item featured">
                         <img src="foto1.jpg" alt="Foto 1">
                         <div class="news-caption">Momen Berharga #1 - Senyuman Terfavorit</div>
                     </div>
-
-                    <!-- Foto 2 & 3 -->
                     <div class="news-item">
                         <img src="foto2.jpg" alt="Foto 2">
                         <div class="news-caption">Momen #2</div>
@@ -292,8 +304,6 @@
                         <img src="foto3.jpg" alt="Foto 3">
                         <div class="news-caption">Momen #3</div>
                     </div>
-
-                    <!-- Foto 4 & 5 -->
                     <div class="news-item">
                         <img src="foto4.jpg" alt="Foto 4">
                         <div class="news-caption">Momen #4</div>
@@ -302,8 +312,6 @@
                         <img src="foto5.jpg" alt="Foto 5">
                         <div class="news-caption">Momen #5</div>
                     </div>
-
-                    <!-- Foto 6 & 7 -->
                     <div class="news-item">
                         <img src="foto6.jpg" alt="Foto 6">
                         <div class="news-caption">Momen #6</div>
