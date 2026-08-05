@@ -1,101 +1,30 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rypa syha drje rhaen! ❤️</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
-            color: #f1f1f1;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-        .card {
-            background: rgba(20, 20, 20, 0.85);
-            border: 2px solid #c5a059;
-            padding: 35px 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            max-width: 420px;
-            width: 100%;
-        }
-        .valyrian-title {
-            color: #c5a059;
-            font-size: 26px;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-        .subtitle {
-            color: #aaa;
-            font-size: 14px;
-            font-style: italic;
-            margin-bottom: 25px;
-        }
-        p {
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            color: #ddd;
-        }
-        .btn {
-            background-color: #c5a059;
-            color: #111;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #e5be75;
-            transform: scale(1.03);
-        }
-        .secret-message {
-            display: none;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #c5a059;
-            animation: fadeIn 1s forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
-</head>
-<body>
+        <div class="slide" id="slide2">
+            <h1 class="valyrian-title">📸 Galeri Kenangan</h1>
+            <div class="subtitle">Momen indah yang telah kita lalui bersama</div>
 
-    <div class="card">
-        <!-- Ucapan Bahasa High Valyrian -->
-        <h1 class="valyrian-title">Rypa syha drje rhaen! 🐉</h1>
-        <div class="subtitle">(Selamat Ulang Tahun, Sayang!)</div>
-        
-        <p>Semoga di usiamu yang baru ini, harimu selalu penuh dengan kebahagiaan dan keberhasilan.</p>
-        
-        <button class="btn" onclick="showMessage()">Buka Pesan Rahasia ✨</button>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="foto1.jpg" alt="Kenangan 1"></div>
+                <div class="gallery-item"><img src="foto2.jpg" alt="Kenangan 2"></div>
+                <div class="gallery-item"><img src="foto3.jpg" alt="Kenangan 3"></div>
+                <div class="gallery-item"><img src="foto4.jpg" alt="Kenangan 4"></div>
+                <div class="gallery-item"><img src="foto5.jpg" alt="Kenangan 5"></div>
+                <div class="gallery-item"><img src="foto6.jpg" alt="Kenangan 6"></div>
+                <div class="gallery-item"><img src="foto7.jpg" alt="Kenangan 7"></div>
+            </div>
 
-        <div class="secret-message" id="message">
-            <p>Terima kasih sudah menjadi bagian terindah dalam hidupku.</p>
-            <p><b>Valar Morghulis, tapi cintaku padamu Valar Dohaeris! ❤️</b></p>
+            <div>
+                <button class="btn btn-secondary" onclick="nextSlide(1)">⬅ Kembalikan</button>
+            </div>
         </div>
+
     </div>
 
     <script>
-        function showMessage() {
-            document.getElementById('message').style.display = 'block';
+        function nextSlide(slideNumber) {
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            document.getElementById('slide' + slideNumber).classList.add('active');
         }
     </script>
 </body>
