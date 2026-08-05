@@ -22,14 +22,13 @@
             overflow-x: hidden;
         }
 
-        /* Container Pembungkus */
         .wrapper {
             position: relative;
             width: 100%;
             max-width: 440px;
         }
 
-        /* Tampilan Dasar Kartu Utamanya */
+        /* CARD UTAMA (Tampilan Awal) */
         .card {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px 20px;
@@ -39,37 +38,8 @@
             transition: all 0.5s ease-in-out;
         }
 
-        /* TAMPILAN AWAL (KARTU UTAMA) */
         #mainCard {
             display: block;
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* TAMPILAN KORAN (TERSEMBUNYI TOTAL SAAT AWAL) */
-        #newspaperCard {
-            display: none;
-            opacity: 0;
-            transform: translateX(100px);
-            background: #fffdf9;
-            border: 2px solid #e0d6c3;
-        }
-
-        /* Class Animasi Muncul Koran */
-        #newspaperCard.show {
-            display: block;
-            animation: slideInRight 0.5s forwards ease-out;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         h1 {
@@ -90,7 +60,6 @@
             margin-bottom: 20px;
         }
 
-        /* Group Tombol */
         .btn-group {
             display: flex;
             gap: 10px;
@@ -124,16 +93,6 @@
             background-color: #a29bfe;
         }
 
-        .btn-back {
-            background-color: #2d3436;
-            margin-top: 15px;
-            width: 100%;
-        }
-        .btn-back:hover {
-            background-color: #636e72;
-        }
-
-        /* Pesan Rahasia */
         .secret-message {
             display: none;
             margin-top: 20px;
@@ -142,15 +101,67 @@
             animation: fadeIn 0.8s forwards;
         }
 
-        /* LAYOUT KERTAS BERITA / KORAN KENANGAN */
+        /* --- HALAMAN FULLSCREEN KORAN / KENANGAN --- */
+        #newspaperCard {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #fffdf9;
+            z-index: 999;
+            padding: 20px 15px 30px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        #newspaperCard.show {
+            display: block;
+            animation: slideInRight 0.5s forwards ease-out;
+        }
+
+        /* Tombol Kembali Ikon Panah Melayang */
+        .btn-back-icon {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            width: 42px;
+            height: 42px;
+            background: #2d3436;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            z-index: 1000;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-back-icon:hover {
+            background-color: #636e72;
+            transform: scale(1.1);
+        }
+
+        /* Container Koran Fullscreen */
+        .news-container {
+            max-width: 600px;
+            margin: 50px auto 0;
+        }
+
         .news-header {
             border-bottom: 3px double #2c3e50;
             padding-bottom: 10px;
             margin-bottom: 15px;
+            text-align: center;
         }
         .news-title {
             font-family: 'Georgia', serif;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
             color: #2c3e50;
             text-transform: uppercase;
@@ -165,19 +176,16 @@
         .news-paper {
             background: #faf6ee;
             border: 1px solid #e2d7c5;
-            padding: 15px;
-            border-radius: 8px;
-            max-height: 380px;
-            overflow-y: auto;
-            text-align: left;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        /* Layout Grid Foto Koran */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .news-item {
@@ -185,23 +193,22 @@
             padding: 6px;
             border: 1px solid #dcd1be;
             box-shadow: 2px 3px 6px rgba(0,0,0,0.08);
-            border-radius: 4px;
+            border-radius: 6px;
         }
 
-        /* Foto Utama (Lebih Besar) */
         .news-item.featured {
             grid-column: span 2;
         }
 
         .news-item img {
             width: 100%;
-            height: 120px;
+            height: 140px;
             object-fit: cover;
-            border-radius: 2px;
+            border-radius: 4px;
             display: block;
         }
         .news-item.featured img {
-            height: 170px;
+            height: 220px;
         }
 
         .news-caption {
@@ -210,6 +217,17 @@
             font-style: italic;
             margin-top: 5px;
             text-align: center;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         @keyframes fadeIn {
@@ -234,15 +252,20 @@
                 <button class="btn btn-secondary" onclick="openNewspaper()">Foto Kenangan 📸</button>
             </div>
 
-            <!-- Pesan Rahasia -->
             <div class="secret-message" id="message">
                 <p>Terima kasih sudah hadir dan melengkapi hari-hariku. Semoga di usiamu yang baru ini kamu makin bahagia dan terus jadi versi terbaik dari dirimu!</p>
                 <p><b>Valar Morghulis, tapi cintaku padamu Valar Dohaeris! 💕</b></p>
             </div>
         </div>
 
-        <!-- CARD GALERI MODEL KORAN / KERTAS BERITA -->
-        <div class="card" id="newspaperCard">
+    </div>
+
+    <!-- HALAMAN FULLSCREEN KORAN / FOTO KENANGAN -->
+    <div id="newspaperCard">
+        <!-- Tombol Kembali Berupa Ikon Panah -->
+        <button class="btn-back-icon" onclick="closeNewspaper()">←</button>
+
+        <div class="news-container">
             <div class="news-header">
                 <div class="news-title">📰 THE DAILY MEMORIES</div>
                 <div class="news-date">Edisi Spesial Ulang Tahun • Berita Utama Hari Ini</div>
@@ -291,11 +314,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Tombol Kembali Ke Awal -->
-            <button class="btn btn-back" onclick="closeNewspaper()">⬅ Kembali ke Utama</button>
         </div>
-
     </div>
 
     <script>
@@ -309,22 +328,15 @@
         }
 
         function openNewspaper() {
-            // Sembunyikan halaman utama
-            document.getElementById('mainCard').style.display = 'none';
-            
-            // Tampilkan halaman koran dengan animasi bergeser dari kanan
             var news = document.getElementById('newspaperCard');
             news.classList.add('show');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeNewspaper() {
-            // Sembunyikan koran
             var news = document.getElementById('newspaperCard');
             news.classList.remove('show');
-            news.style.display = 'none';
-            
-            // Kembalikan ke halaman utama
-            document.getElementById('mainCard').style.display = 'block';
+            document.body.style.overflow = 'auto';
         }
     </script>
 </body>
