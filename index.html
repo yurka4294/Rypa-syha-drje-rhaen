@@ -1,30 +1,188 @@
-        <div class="slide" id="slide2">
-            <h1 class="valyrian-title">📸 Galeri Kenangan</h1>
-            <div class="subtitle">Momen indah yang telah kita lalui bersama</div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Sayang! ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 420px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            color: #d63384;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 13px;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* Container untuk 2 Tombol Utama */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
 
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="foto1.jpg" alt="Kenangan 1"></div>
-                <div class="gallery-item"><img src="foto2.jpg" alt="Kenangan 2"></div>
-                <div class="gallery-item"><img src="foto3.jpg" alt="Kenangan 3"></div>
-                <div class="gallery-item"><img src="foto4.jpg" alt="Kenangan 4"></div>
-                <div class="gallery-item"><img src="foto5.jpg" alt="Kenangan 5"></div>
-                <div class="gallery-item"><img src="foto6.jpg" alt="Kenangan 6"></div>
-                <div class="gallery-item"><img src="foto7.jpg" alt="Kenangan 7"></div>
-            </div>
+        .btn {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            flex: 1;
+            min-width: 140px;
+        }
+        .btn:hover {
+            background-color: #ff6b81;
+            transform: scale(1.05);
+        }
 
-            <div>
-                <button class="btn btn-secondary" onclick="nextSlide(1)">⬅ Kembalikan</button>
-            </div>
+        .btn-secondary {
+            background-color: #6c5ce7;
+        }
+        .btn-secondary:hover {
+            background-color: #a29bfe;
+        }
+
+        /* Styling Pesan Rahasia */
+        .secret-message {
+            display: none;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ffb8c6;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        /* Styling Galeri 7 Foto */
+        .gallery-container {
+            display: none;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #a29bfe;
+            animation: fadeIn 0.8s forwards;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-top: 10px;
+        }
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 110px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>🎉 Happy Birthday, Sayang! 🎂</h1>
+        <div class="subtitle">Rypa syha drje rhaen! 🐉</div>
+
+        <p>Selamat ulang tahun! Semoga panjang umur, sehat selalu, dan semua yang kamu impikan bisa tercapai.</p>
+        
+        <!-- 2 Tombol Pilihan -->
+        <div class="btn-group">
+            <button class="btn" onclick="toggleMessage()">Pesan Rahasia ❤️</button>
+            <button class="btn btn-secondary" onclick="toggleGallery()">Foto Kenangan 📸</button>
         </div>
 
+        <!-- Bagian Pesan Rahasia -->
+        <div class="secret-message" id="message">
+            <p>Terima kasih sudah hadir dan melengkapi hari-hariku. Semoga di usiamu yang baru ini kamu makin bahagia dan terus jadi versi terbaik dari dirimu!</p>
+            <p><b>Valar Morghulis, tapi cintaku padamu Valar Dohaeris! 💕</b></p>
+        </div>
+
+        <!-- Bagian Galeri 7 Foto Kenangan -->
+        <div class="gallery-container" id="gallery">
+            <p style="margin-bottom: 10px; font-weight: bold; color: #6c5ce7;">Kenangan Indah Kita ✨</p>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="foto1.jpg" alt="Foto 1"></div>
+                <div class="gallery-item"><img src="foto2.jpg" alt="Foto 2"></div>
+                <div class="gallery-item"><img src="foto3.jpg" alt="Foto 3"></div>
+                <div class="gallery-item"><img src="foto4.jpg" alt="Foto 4"></div>
+                <div class="gallery-item"><img src="foto5.jpg" alt="Foto 5"></div>
+                <div class="gallery-item"><img src="foto6.jpg" alt="Foto 6"></div>
+                <div class="gallery-item"><img src="foto7.jpg" alt="Foto 7"></div>
+            </div>
+        </div>
     </div>
 
     <script>
-        function nextSlide(slideNumber) {
-            document.querySelectorAll('.slide').forEach(slide => {
-                slide.classList.remove('active');
-            });
-            document.getElementById('slide' + slideNumber).classList.add('active');
+        function toggleMessage() {
+            var msg = document.getElementById('message');
+            if (msg.style.display === 'block') {
+                msg.style.display = 'none';
+            } else {
+                msg.style.display = 'block';
+            }
+        }
+
+        function toggleGallery() {
+            var gal = document.getElementById('gallery');
+            if (gal.style.display === 'block') {
+                gal.style.display = 'none';
+            } else {
+                gal.style.display = 'block';
+            }
         }
     </script>
 </body>
