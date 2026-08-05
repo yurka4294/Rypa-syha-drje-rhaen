@@ -21,16 +21,55 @@
             padding: 20px;
             overflow-x: hidden;
         }
+
+        /* Container Pembungkus Layar */
+        .wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            min-height: 520px;
+        }
+
+        /* Tampilan Dasar Kartu Utamanya */
         .card {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px 20px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 420px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
             width: 100%;
-            position: relative;
-            z-index: 10;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease;
         }
+
+        /* CARD UTAMA (Tampilan Awal) */
+        #mainCard {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 2;
+        }
+        #mainCard.slide-out {
+            transform: translateX(-120%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* CARD GALERI (Koran / Kliping) */
+        #newspaperCard {
+            transform: translateX(120%);
+            opacity: 0;
+            z-index: 3;
+            pointer-events: none;
+            background: #fffdf9; /* Warna khas kertas koran/kliping */
+            border: 2px solid #e0d6c3;
+        }
+        #newspaperCard.slide-in {
+            transform: translateX(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         h1 {
             color: #d63384;
             font-size: 24px;
@@ -48,8 +87,8 @@
             line-height: 1.6;
             margin-bottom: 20px;
         }
-        
-        /* Container untuk 2 Tombol Utama */
+
+        /* Group Tombol */
         .btn-group {
             display: flex;
             gap: 10px;
@@ -69,7 +108,7 @@
             cursor: pointer;
             transition: transform 0.2s, background-color 0.2s;
             flex: 1;
-            min-width: 140px;
+            min-width: 130px;
         }
         .btn:hover {
             background-color: #ff6b81;
@@ -83,7 +122,16 @@
             background-color: #a29bfe;
         }
 
-        /* Styling Pesan Rahasia */
+        .btn-back {
+            background-color: #2d3436;
+            margin-top: 15px;
+            width: 100%;
+        }
+        .btn-back:hover {
+            background-color: #636e72;
+        }
+
+        /* Pesan Rahasia */
         .secret-message {
             display: none;
             margin-top: 20px;
@@ -92,37 +140,74 @@
             animation: fadeIn 0.8s forwards;
         }
 
-        /* Styling Galeri 7 Foto */
-        .gallery-container {
-            display: none;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 2px dashed #a29bfe;
-            animation: fadeIn 0.8s forwards;
+        /* LAYOUT KERTAS BERITA / KORAN KENANGAN */
+        .news-header {
+            border-bottom: 3px double #2c3e50;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
-            max-height: 320px;
+        .news-title {
+            font-family: 'Georgia', serif;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .news-date {
+            font-size: 11px;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+
+        .news-paper {
+            background: #faf6ee;
+            border: 1px solid #e2d7c5;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 380px;
             overflow-y: auto;
-            padding-right: 5px;
+            text-align: left;
+        }
+
+        /* Masonry / Collaging Layout untuk Foto di Koran */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             margin-top: 10px;
         }
-        .gallery-item {
-            border-radius: 10px;
-            overflow: hidden;
-            height: 110px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        .news-item {
+            background: #fff;
+            padding: 6px;
+            border: 1px solid #dcd1be;
+            box-shadow: 2px 3px 6px rgba(0,0,0,0.08);
+            border-radius: 4px;
         }
-        .gallery-item img {
+
+        /* Foto Pertama Di-span selebar 2 kolom agar jadi Headliner Foto Berita Utama */
+        .news-item.featured {
+            grid-column: span 2;
+        }
+
+        .news-item img {
             width: 100%;
-            height: 100%;
+            height: 120px;
             object-fit: cover;
-            transition: transform 0.3s;
+            border-radius: 2px;
+            display: block;
         }
-        .gallery-item img:hover {
-            transform: scale(1.1);
+        .news-item.featured img {
+            height: 170px;
+        }
+
+        .news-caption {
+            font-size: 11px;
+            color: #555;
+            font-style: italic;
+            margin-top: 5px;
+            text-align: center;
         }
 
         @keyframes fadeIn {
@@ -133,37 +218,82 @@
 </head>
 <body>
 
-    <div class="card">
-        <h1>🎉 Happy Birthday, Sayang! 🎂</h1>
-        <div class="subtitle">Rypa syha drje rhaen! 🐉</div>
-
-        <p>Selamat ulang tahun! Semoga panjang umur, sehat selalu, dan semua yang kamu impikan bisa tercapai.</p>
+    <div class="wrapper">
         
-        <!-- 2 Tombol Pilihan -->
-        <div class="btn-group">
-            <button class="btn" onclick="toggleMessage()">Pesan Rahasia ❤️</button>
-            <button class="btn btn-secondary" onclick="toggleGallery()">Foto Kenangan 📸</button>
-        </div>
+        <!-- CARD UTAMA -->
+        <div class="card" id="mainCard">
+            <h1>🎉 Happy Birthday, Sayang! 🎂</h1>
+            <div class="subtitle">Rypa syha drje rhaen! 🐉</div>
 
-        <!-- Bagian Pesan Rahasia -->
-        <div class="secret-message" id="message">
-            <p>Terima kasih sudah hadir dan melengkapi hari-hariku. Semoga di usiamu yang baru ini kamu makin bahagia dan terus jadi versi terbaik dari dirimu!</p>
-            <p><b>Valar Morghulis, tapi cintaku padamu Valar Dohaeris! 💕</b></p>
-        </div>
+            <p>Selamat ulang tahun! Semoga panjang umur, sehat selalu, dan semua yang kamu impikan bisa tercapai.</p>
+            
+            <div class="btn-group">
+                <button class="btn" onclick="toggleMessage()">Pesan Rahasia ❤️</button>
+                <button class="btn btn-secondary" onclick="openNewspaper()">Foto Kenangan 📸</button>
+            </div>
 
-        <!-- Bagian Galeri 7 Foto Kenangan -->
-        <div class="gallery-container" id="gallery">
-            <p style="margin-bottom: 10px; font-weight: bold; color: #6c5ce7;">Kenangan Indah Kita ✨</p>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="foto1.jpg" alt="Foto 1"></div>
-                <div class="gallery-item"><img src="foto2.jpg" alt="Foto 2"></div>
-                <div class="gallery-item"><img src="foto3.jpg" alt="Foto 3"></div>
-                <div class="gallery-item"><img src="foto4.jpg" alt="Foto 4"></div>
-                <div class="gallery-item"><img src="foto5.jpg" alt="Foto 5"></div>
-                <div class="gallery-item"><img src="foto6.jpg" alt="Foto 6"></div>
-                <div class="gallery-item"><img src="foto7.jpg" alt="Foto 7"></div>
+            <!-- Pesan Rahasia -->
+            <div class="secret-message" id="message">
+                <p>Terima kasih sudah hadir dan melengkapi hari-hariku. Semoga di usiamu yang baru ini kamu makin bahagia dan terus jadi versi terbaik dari dirimu!</p>
+                <p><b>Valar Morghulis, tapi cintaku padamu Valar Dohaeris! 💕</b></p>
             </div>
         </div>
+
+        <!-- CARD GALERI MODEL KORAN / KERTAS BERITA -->
+        <div class="card" idnewspaperCard">
+            <div class="news-header">
+                <div class="news-title">📰 THE DAILY MEMORIES</div>
+                <div class="news-date">Edisi Spesial Ulang Tahun • Berita Utama Hari Ini</div>
+            </div>
+
+            <div class="news-paper">
+                <p style="font-size: 12px; color: #444; font-style: italic; margin-bottom: 10px; text-align: center;">
+                    "Kumpulan dokumentasi momen terindah yang berhasil dirangkum oleh wartawan cinta."
+                </p>
+
+                <div class="news-grid">
+                    <!-- Foto 1: Berita Utama -->
+                    <div class="news-item featured">
+                        <img src="foto1.jpg" alt="Foto 1">
+                        <div class="news-caption">Momen Berharga #1 - Senyuman Terfavorit</div>
+                    </div>
+
+                    <!-- Foto 2 & 3 -->
+                    <div class="news-item">
+                        <img src="foto2.jpg" alt="Foto 2">
+                        <div class="news-caption">Momen #2</div>
+                    </div>
+                    <div class="news-item">
+                        <img src="foto3.jpg" alt="Foto 3">
+                        <div class="news-caption">Momen #3</div>
+                    </div>
+
+                    <!-- Foto 4 & 5 -->
+                    <div class="news-item">
+                        <img src="foto4.jpg" alt="Foto 4">
+                        <div class="news-caption">Momen #4</div>
+                    </div>
+                    <div class="news-item">
+                        <img src="foto5.jpg" alt="Foto 5">
+                        <div class="news-caption">Momen #5</div>
+                    </div>
+
+                    <!-- Foto 6 & 7 -->
+                    <div class="news-item">
+                        <img src="foto6.jpg" alt="Foto 6">
+                        <div class="news-caption">Momen #6</div>
+                    </div>
+                    <div class="news-item">
+                        <img src="foto7.jpg" alt="Foto 7">
+                        <div class="news-caption">Momen #7</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol Kembali Ke Awal -->
+            <button class="btn btn-back" onclick="closeNewspaper()">⬅ Kembali ke Utama</button>
+        </div>
+
     </div>
 
     <script>
@@ -176,13 +306,14 @@
             }
         }
 
-        function toggleGallery() {
-            var gal = document.getElementById('gallery');
-            if (gal.style.display === 'block') {
-                gal.style.display = 'none';
-            } else {
-                gal.style.display = 'block';
-            }
+        function openNewspaper() {
+            document.getElementById('mainCard').classList.add('slide-out');
+            document.getElementById('newspaperCard').classList.add('slide-in');
+        }
+
+        function closeNewspaper() {
+            document.getElementById('mainCard').classList.remove('slide-out');
+            document.getElementById('newspaperCard').classList.remove('slide-in');
         }
     </script>
 </body>
