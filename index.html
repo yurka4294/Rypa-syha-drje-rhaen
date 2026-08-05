@@ -22,12 +22,11 @@
             overflow-x: hidden;
         }
 
-        /* Container Pembungkus Layar */
+        /* Container Pembungkus */
         .wrapper {
             position: relative;
             width: 100%;
             max-width: 440px;
-            min-height: 520px;
         }
 
         /* Tampilan Dasar Kartu Utamanya */
@@ -37,37 +36,40 @@
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.12);
             width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease;
+            transition: all 0.5s ease-in-out;
         }
 
-        /* CARD UTAMA (Tampilan Awal) */
+        /* TAMPILAN AWAL (KARTU UTAMA) */
         #mainCard {
-            transform: translateX(0);
+            display: block;
             opacity: 1;
-            z-index: 2;
-        }
-        #mainCard.slide-out {
-            transform: translateX(-120%);
-            opacity: 0;
-            pointer-events: none;
+            transform: scale(1);
         }
 
-        /* CARD GALERI (Koran / Kliping) */
+        /* TAMPILAN KORAN (TERSEMBUNYI TOTAL SAAT AWAL) */
         #newspaperCard {
-            transform: translateX(120%);
+            display: none;
             opacity: 0;
-            z-index: 3;
-            pointer-events: none;
-            background: #fffdf9; /* Warna khas kertas koran/kliping */
+            transform: translateX(100px);
+            background: #fffdf9;
             border: 2px solid #e0d6c3;
         }
-        #newspaperCard.slide-in {
-            transform: translateX(0);
-            opacity: 1;
-            pointer-events: auto;
+
+        /* Class Animasi Muncul Koran */
+        #newspaperCard.show {
+            display: block;
+            animation: slideInRight 0.5s forwards ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         h1 {
@@ -170,7 +172,7 @@
             text-align: left;
         }
 
-        /* Masonry / Collaging Layout untuk Foto di Koran */
+        /* Layout Grid Foto Koran */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -186,7 +188,7 @@
             border-radius: 4px;
         }
 
-        /* Foto Pertama Di-span selebar 2 kolom agar jadi Headliner Foto Berita Utama */
+        /* Foto Utama (Lebih Besar) */
         .news-item.featured {
             grid-column: span 2;
         }
@@ -240,7 +242,7 @@
         </div>
 
         <!-- CARD GALERI MODEL KORAN / KERTAS BERITA -->
-        <div class="card" idnewspaperCard">
+        <div class="card" id="newspaperCard">
             <div class="news-header">
                 <div class="news-title">📰 THE DAILY MEMORIES</div>
                 <div class="news-date">Edisi Spesial Ulang Tahun • Berita Utama Hari Ini</div>
@@ -307,13 +309,22 @@
         }
 
         function openNewspaper() {
-            document.getElementById('mainCard').classList.add('slide-out');
-            document.getElementById('newspaperCard').classList.add('slide-in');
+            // Sembunyikan halaman utama
+            document.getElementById('mainCard').style.display = 'none';
+            
+            // Tampilkan halaman koran dengan animasi bergeser dari kanan
+            var news = document.getElementById('newspaperCard');
+            news.classList.add('show');
         }
 
         function closeNewspaper() {
-            document.getElementById('mainCard').classList.remove('slide-out');
-            document.getElementById('newspaperCard').classList.remove('slide-in');
+            // Sembunyikan koran
+            var news = document.getElementById('newspaperCard');
+            news.classList.remove('show');
+            news.style.display = 'none';
+            
+            // Kembalikan ke halaman utama
+            document.getElementById('mainCard').style.display = 'block';
         }
     </script>
 </body>
